@@ -16,6 +16,7 @@ dependencies {
 
 idea {
     module {
-        excludeDirs = [".cache", ".idea", ".gradle", "gradle", ".nb-gradle", ".settings", "bin", "out", "target"].collect { file(it) }
+        excludeDirs = ['.cache', '.idea', '.gradle', 'gradle', '.nb-gradle',
+                '.settings', 'bin', 'out', 'target', 'build'].collect { file(it) }
     }
 }
