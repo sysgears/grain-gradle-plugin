@@ -36,7 +36,16 @@ class GrainTask extends AbstractTask {
      * @return the arguments if found, empty list otherwise
      */
     List getGrainArgs() {
-        grainArgs ?: ProjectEnvironment.lookUpProjectProp(project, 'grainArgs', '')?.split(',')?.toList()
+        if (grainArgs) {
+            grainArgs
+        } else {
+            def argsToProcess = ProjectEnvironment.lookUpProjectProp(project, 'grainArgs', '')
+            if (argsToProcess) {
+                argsToProcess.split(',')?.toList()
+            } else {
+                []
+            }
+        }
     }
 
     /**
@@ -45,8 +54,17 @@ class GrainTask extends AbstractTask {
      * @return the options if found, default options otherwise
      */
     List getGrainOpts() {
-        grainOpts ?: ProjectEnvironment.lookUpEnvVariable('GRAIN_OPTS', '-server -Xmx512M -Xms64M ' +
-                '-XX:PermSize=32m -XX:MaxPermSize=256m -Dfile.encoding=UTF-8 ' +
-                '-XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC').split(' ')?.toList()
+        if (grainOpts) {
+            grainOpts
+        } else {
+            def optsToProcess = ProjectEnvironment.lookUpEnvVariable('GRAIN_OPTS', '-server -Xmx512M -Xms64M ' +
+                    '-XX:PermSize=32m -XX:MaxPermSize=256m -Dfile.encoding=UTF-8 ' +
+                    '-XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC')
+            if (optsToProcess) {
+                optsToProcess.split(' ')?.toList()
+            } else {
+                []
+            }
+        }
     }
 }
