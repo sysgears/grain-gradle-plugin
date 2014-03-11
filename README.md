@@ -36,7 +36,7 @@ grain {
 }
 ```
 
-Don't forget to put your Grain site sources to the directory specified in `grain.base` property (to start with, you
+Then put your Grain site sources to the directory specified in `grain.base` property (to start with, you
 can use one of the Grain [themes][Grain themes]).
 
 As you have added this to build file, you can preview, generate and deploy a Grain site:
@@ -51,7 +51,7 @@ For further information please visit [Grain project website][Grain].
 Contributing
 ============
 
-Any person or company wanting to contribute to Grain Framework should follow
+Any person or company wanting to contribute to Grain Gradle plugin should follow
 the following rules in order to their contribution being accepted.
 
 Sign your Work
