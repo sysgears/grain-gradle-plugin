@@ -20,3 +20,7 @@ idea {
                 '.settings', 'bin', 'out', 'target', 'build'].collect { file(it) }
     }
 }
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '1.8'
+}
