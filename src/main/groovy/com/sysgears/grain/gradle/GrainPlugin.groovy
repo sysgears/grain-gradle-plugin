@@ -20,6 +20,7 @@ class GrainPlugin implements Plugin<Project> {
             grainGenerate description: 'Runs Grain generate command', args: 'generate'
             grainPreview description: 'Runs Grain preview command', args: 'preview'
             grainDeploy description: 'Runs Grain deploy command', args: 'deploy'
+            grainClean description: 'Runs Grain clean command', args: 'clean'
         }
 
         new ConfigurationHandler(project).with {
