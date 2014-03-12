@@ -15,17 +15,14 @@ class GrainPluginExtension {
     /** Relative path to Grain site project. */
     String projectDir
 
-    /** Grain version to use to launch Grain actions. */
-    String version
-
     /**
      * Sets Grain version, thus calling actions connected to the broadcaster.
      *
      * @param version version to set
      */
-    public void setVersion(String version) {
-        this.version = version
-        broadcast.execute(version)
+    public void setProjectDir(String projectDir) {
+        this.projectDir = projectDir
+        broadcast.execute(projectDir)
     }
 
     /**
@@ -33,7 +30,7 @@ class GrainPluginExtension {
      *
      * @param action action to call
      */
-    public void onSetVersion(Closure action) {
+    public void onSetProjectDir(Closure action) {
         broadcast.add(action as Action<String>)
     }
 }

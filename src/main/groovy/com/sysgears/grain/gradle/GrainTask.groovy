@@ -39,12 +39,8 @@ class GrainTask extends AbstractTask {
         if (grainArgs) {
             grainArgs
         } else {
-            def argsToProcess = ProjectEnvironment.lookUpProjectProp(project, 'grainArgs', '')
-            if (argsToProcess) {
-                argsToProcess.split(',')?.toList()
-            } else {
-                []
-            }
+            def rawArgs = ProjectEnvironment.lookUpProjectProp(project, 'grainArgs', '')
+            rawArgs ? rawArgs.split(',')?.toList() : []
         }
     }
 
@@ -57,14 +53,10 @@ class GrainTask extends AbstractTask {
         if (grainOpts) {
             grainOpts
         } else {
-            def optsToProcess = ProjectEnvironment.lookUpEnvVariable('GRAIN_OPTS', '-server -Xmx512M -Xms64M ' +
+            def rawOpts = ProjectEnvironment.lookUpEnvVariable('GRAIN_OPTS', '-server -Xmx512M -Xms64M ' +
                     '-XX:PermSize=32m -XX:MaxPermSize=256m -Dfile.encoding=UTF-8 ' +
                     '-XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC')
-            if (optsToProcess) {
-                optsToProcess.split(' ')?.toList()
-            } else {
-                []
-            }
+            rawOpts ? rawOpts.split(' ')?.toList() : []
         }
     }
 }

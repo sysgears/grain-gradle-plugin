@@ -3,6 +3,7 @@ package com.sysgears.grain.gradle
 import com.sysgears.grain.gradle.handlers.ConfigurationHandler
 import com.sysgears.grain.gradle.handlers.DependencyHandler
 import com.sysgears.grain.gradle.handlers.GrainTaskHandler
+import com.sysgears.grain.gradle.helpers.GrainEnvironment
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -15,29 +16,34 @@ class GrainPlugin implements Plugin<Project> {
 
         def configuration = project.extensions.create('grain', GrainPluginExtension)
 
-        new GrainTaskHandler(project).with {
-            grain description: 'Runs Grain command-line extension'
-            grainGenerate description: 'Runs Grain generate command', args: 'generate'
-            grainPreview description: 'Runs Grain preview command', args: 'preview'
-            grainDeploy description: 'Runs Grain deploy command', args: 'deploy'
-            grainClean description: 'Runs Grain clean command', args: 'clean'
-        }
+        configuration.onSetProjectDir {
+            def grainVersion = GrainEnvironment.lookUpProperty(project, 'grain.version', '')
 
-        new ConfigurationHandler(project).with {
-            exclude group: 'rhino'
-            exclude group: 'commons-logging'
-        }
+            if (grainVersion) {
+                new GrainTaskHandler(project).with {
+                    grain description: 'Runs Grain command-line extension'
+                    grainGenerate description: 'Runs Grain generate command', args: 'generate'
+                    grainPreview description: 'Runs Grain preview command', args: 'preview'
+                    grainDeploy description: 'Runs Grain deploy command', args: 'deploy'
+                    grainClean description: 'Runs Grain clean command', args: 'clean'
+                }
 
-        configuration.onSetVersion {
-            project.sourceSets {
-                grain {
-                    groovy {
-                        srcDirs = [configuration.projectDir]
+                new ConfigurationHandler(project).with {
+                    exclude group: 'rhino'
+                    exclude group: 'commons-logging'
+                }
+
+                project.sourceSets {
+                    grain {
+                        groovy {
+                            srcDirs = [configuration.projectDir]
+                        }
                     }
                 }
-            }
-            new DependencyHandler(project).with {
-                grainCompile "com.sysgears.grain:grain:$configuration.version"
+
+                new DependencyHandler(project).with {
+                    grainCompile "com.sysgears.grain:grain:$grainVersion"
+                }
             }
         }
     }
