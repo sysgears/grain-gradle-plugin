@@ -32,11 +32,11 @@ repositories {
 
 grain {
     version = '0.6.1' // version of the Grain framework
-    base = 'src/site' // relative path to the site sources
+    projectDir = 'src/site' // relative path to the site sources
 }
 ```
 
-Then put your Grain site sources to the directory specified in `grain.base` property (to start with, you
+Then put your Grain site sources to the directory specified in `grain.projectDir` property (to start with, you
 can use one of the Grain [themes][Grain themes]).
 
 As you have added the sources, you can preview, generate and deploy your Grain site:

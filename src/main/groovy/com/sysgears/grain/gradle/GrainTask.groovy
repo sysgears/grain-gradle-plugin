@@ -26,7 +26,7 @@ class GrainTask extends AbstractTask {
             args = getGrainArgs()
             jvmArgs = getGrainOpts()
             standardInput = System.in
-            workingDir = project.file("$project.grain.base")
+            workingDir = project.file("$project.grain.projectDir")
         }
     }
 

@@ -32,7 +32,7 @@ class GrainPlugin implements Plugin<Project> {
             project.sourceSets {
                 grain {
                     groovy {
-                        srcDirs = [configuration.base]
+                        srcDirs = [configuration.projectDir]
                     }
                 }
             }
