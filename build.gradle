@@ -1,9 +1,8 @@
 apply plugin: 'idea'
 apply plugin: 'groovy'
-apply plugin: 'maven'
 
-version = '0.1.0-SNAPSHOT'
 group = 'com.sysgears.grain'
+version = '0.1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
@@ -16,7 +15,7 @@ dependencies {
 
 idea {
     module {
-        excludeDirs = ['.cache', '.idea', '.gradle', 'gradle', '.nb-gradle',
+        excludeDirs = ['.cache', '.idea', '.gradle', '.nb-gradle',
                 '.settings', 'bin', 'out', 'target', 'build'].collect { file(it) }
     }
 }
@@ -24,3 +23,5 @@ idea {
 task wrapper(type: Wrapper) {
     gradleVersion = '1.8'
 }
+
+apply from: 'gradle/publish.gradle'
