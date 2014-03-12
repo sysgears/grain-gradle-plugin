@@ -39,12 +39,15 @@ grain {
 Then put your Grain site sources to the directory specified in `grain.base` property (to start with, you
 can use one of the Grain [themes][Grain themes]).
 
-As you have added this to build file, you can preview, generate and deploy a Grain site:
+As you have added the sources, you can preview, generate and deploy your Grain site:
 
- - `gradle grainPreview` - launches your website in preview mode
- - `gradle grainGenerate` - generates all the website files
- - `gradle grainDeploy` - deploys the resulting files
- - `gradle grainClean` - cleans the site cache directories
+ - `gradle grainPreview` - launches your website in a preview mode
+ - `gradle grainGenerate` - generates all the website files to the *destination* directory (see [filesystem layout][filesystem layout])
+ - `gradle grainDeploy` - deploys the resulting files (see [deployment configuration][deployment configuration])
+ - `gradle grainClean` - cleans the site *destination* and *target* directories
+
+[filesystem layout]: http://sysgears.com/grain/docs/latest/#filesystem-layout
+[deployment configuration]: http://sysgears.com/grain/docs/latest/#deployment-configuration
 
 For further information please visit [Grain project website][Grain].
 
