@@ -52,8 +52,8 @@ Advanced Usage
 --------------
 
 You can run your own Grain [commands][custom commands] from the build script. For example, if you
-have the `compress` command to gzip files in the *destination* directory before deploying, you can
-simply execute it by the following `GrainTask`:
+have the `compress` command to gzip site files before deploying, you can simply execute it by the
+following `GrainTask`:
 
 ```groovy
 task(grainCompress, type: com.sysgears.grain.gradle.GrainTask) {
