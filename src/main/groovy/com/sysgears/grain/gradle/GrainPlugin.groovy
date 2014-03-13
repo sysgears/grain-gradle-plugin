@@ -22,11 +22,11 @@ class GrainPlugin implements Plugin<Project> {
 
             if (grainVersion) {
                 new GrainTaskHandler(project).with {
-                    grain description: 'Runs Grain command line commands'
-                    grainGenerate description: 'Runs Grain generate command', command: 'generate'
-                    grainPreview description: 'Runs Grain preview command', command: 'preview'
-                    grainDeploy description: 'Runs Grain deploy command', command: 'deploy'
-                    grainClean description: 'Runs Grain clean command', command: 'clean'
+                    grain description: 'Runs Grain command line commands.'
+                    grainGenerate description: 'Runs Grain generate command.', command: 'generate'
+                    grainPreview description: 'Runs Grain preview command.', command: 'preview'
+                    grainDeploy description: 'Runs Grain deploy command.', command: 'deploy'
+                    grainClean description: 'Runs Grain clean command.', command: 'clean'
                 }
 
                 new ConfigurationHandler(project).with {
@@ -37,7 +37,7 @@ class GrainPlugin implements Plugin<Project> {
                 project.sourceSets {
                     grain {
                         groovy {
-                            srcDirs = [configuration.projectDir]
+                            srcDirs = [configuration.projectDir ? "$configuration.projectDir/theme/src" : 'theme/src']
                         }
                     }
                 }
@@ -46,7 +46,7 @@ class GrainPlugin implements Plugin<Project> {
                     grainCompile "com.sysgears.grain:grain:$grainVersion"
                 }
             } else {
-                throw new InvalidUserDataException('Unable to find Grain version, please check [grain.projectDir] property')
+                project.logger.warn("Unable to find Grain project in the [$configuration.projectDir] directory.")
             }
         }
     }
