@@ -51,16 +51,17 @@ As you have added the sources, you can preview, generate and deploy your Grain s
 Advanced Usage
 --------------
 
-You can run your own Grain commands from the build script. For example, if you have the `compress`
-command to gzip files in the *destination* directory before the deploying, you can simply call it
-by the following `GrainTask` task:
+You can run your own Grain [commands][custom commands] from the build script. For example, if you
+have the `compress` command to gzip files in the *destination* directory before deploying, you can
+simply execute it by the following `GrainTask`:
 
 ```groovy
 task(grainCompress, type: com.sysgears.grain.gradle.GrainTask) {
-   command = 'compress' // the name of the custom command to run
+   command = 'compress' // the name of the custom command
    // arguments = []    // the arguments to pass to the command
 }
 ```
+[custom commands]: http://sysgears.com/grain/docs/latest/#creating-your-own-commands
 
 For further information please visit [Grain project website][Grain].
 
