@@ -31,7 +31,6 @@ repositories {
 }
 
 grain {
-    version = '0.6.1' // version of the Grain framework
     projectDir = 'src/site' // relative path to the site sources
 }
 ```
@@ -48,6 +47,20 @@ As you have added the sources, you can preview, generate and deploy your Grain s
 
 [filesystem layout]: http://sysgears.com/grain/docs/latest/#filesystem-layout
 [deployment configuration]: http://sysgears.com/grain/docs/latest/#deployment-configuration
+
+Advanced Usage
+--------------
+
+You can run your own Grain commands from the build script. For example, if you have the `compress`
+command to gzip files in the *destination* directory before the deploying, you can simply call it
+by the following `GrainTask` task:
+
+```groovy
+task(grainCompress, type: com.sysgears.grain.gradle.GrainTask) {
+   command = 'compress' // the name of the custom command to run
+   // arguments = []    // the arguments to pass to the command
+}
+```
 
 For further information please visit [Grain project website][Grain].
 

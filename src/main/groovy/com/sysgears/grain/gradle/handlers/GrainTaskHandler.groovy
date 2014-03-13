@@ -18,8 +18,9 @@ class GrainTaskHandler {
 
         project.task(name, type: GrainTask) {
             group = settings.group ?: 'Grain'
-            grainArgs = settings.args ? settings.args.split(' ') : []
-            grainOpts = settings.opts ? settings.opts.split(' ') : []
+            command = settings.command ?: ''
+            arguments = settings.args ? settings.args.split(' ') : []
+            jvmArguments = settings.opts ? settings.opts.split(' ') : []
             description = settings.description ?: ''
         }
     }

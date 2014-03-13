@@ -8,8 +8,8 @@ import org.gradle.listener.ActionBroadcast
  */
 class GrainPluginExtension {
 
-    /** Broadcaster to notify about changing the Grain version,
-     * so that project dependencies are added only when the version is set. */
+    /** Broadcaster to notify about changing the Grain project directory,
+     * so that project dependencies are added only when the directory is set. */
     private final ActionBroadcast<String> broadcast = new ActionBroadcast<String>()
 
     /** Relative path to Grain site project. */

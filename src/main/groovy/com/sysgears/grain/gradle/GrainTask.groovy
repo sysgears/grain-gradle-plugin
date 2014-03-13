@@ -9,11 +9,14 @@ import org.gradle.api.tasks.TaskAction
  */
 class GrainTask extends AbstractTask {
 
-    /** List of Grain arguments: 'preview', 'generate', etc. */
-    List grainArgs = []
+    /** Grain command. */
+    String command = ''
 
-    /** List of arguments to launch Grain process: system properties, heap size, etc. */
-    List grainOpts = []
+    /** List of the command arguments. */
+    List arguments = []
+
+    /** List of JVM arguments to launch Grain process: system properties, heap size, etc. */
+    List jvmArguments = []
 
     /**
      * Default Grain action.
@@ -23,8 +26,8 @@ class GrainTask extends AbstractTask {
         project.javaexec {
             main = 'com.sysgears.grain.Main'
             classpath = project.sourceSets.grain.runtimeClasspath
-            args = getGrainArgs()
-            jvmArgs = getGrainOpts()
+            args = getGrainArguments()
+            jvmArgs = getJvmArguments()
             standardInput = System.in
             workingDir = project.file("$project.grain.projectDir")
         }
@@ -35,28 +38,19 @@ class GrainTask extends AbstractTask {
      *
      * @return the arguments if found, empty list otherwise
      */
-    List getGrainArgs() {
-        if (grainArgs) {
-            grainArgs
-        } else {
-            def rawArgs = ProjectEnvironment.lookUpProjectProp(project, 'grainArgs', '')
-            rawArgs ? rawArgs.split(',')?.toList() : []
-        }
+    List getGrainArguments() {
+        List grainArgs = command ? [command] + arguments : []
+        grainArgs ?: ProjectEnvironment.lookUpProjectProp(project, 'grainArgs', '')?.split(',')?.toList()?.findAll { it }
     }
 
     /**
-     * Gets Grain options, either provided by a task configuration or passed to the task as arguments.
+     * Gets JVM arguments, either provided by a task configuration or passed to the task as arguments.
      *
      * @return the options if found, default options otherwise
      */
-    List getGrainOpts() {
-        if (grainOpts) {
-            grainOpts
-        } else {
-            def rawOpts = ProjectEnvironment.lookUpEnvVariable('GRAIN_OPTS', '-server -Xmx512M -Xms64M ' +
-                    '-XX:PermSize=32m -XX:MaxPermSize=256m -Dfile.encoding=UTF-8 ' +
-                    '-XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC')
-            rawOpts ? rawOpts.split(' ')?.toList() : []
-        }
+    List getJvmArguments() {
+        jvmArguments ?: ProjectEnvironment.lookUpEnvVariable('GRAIN_OPTS', '-server -Xmx512M -Xms64M ' +
+                '-XX:PermSize=32m -XX:MaxPermSize=256m -Dfile.encoding=UTF-8 ' +
+                '-XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC').split(' ')?.toList()?.findAll { it }
     }
 }

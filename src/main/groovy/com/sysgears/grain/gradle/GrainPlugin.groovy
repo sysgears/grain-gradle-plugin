@@ -4,6 +4,7 @@ import com.sysgears.grain.gradle.handlers.ConfigurationHandler
 import com.sysgears.grain.gradle.handlers.DependencyHandler
 import com.sysgears.grain.gradle.handlers.GrainTaskHandler
 import com.sysgears.grain.gradle.helpers.GrainEnvironment
+import org.gradle.api.InvalidUserDataException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -21,11 +22,11 @@ class GrainPlugin implements Plugin<Project> {
 
             if (grainVersion) {
                 new GrainTaskHandler(project).with {
-                    grain description: 'Runs Grain command-line extension'
-                    grainGenerate description: 'Runs Grain generate command', args: 'generate'
-                    grainPreview description: 'Runs Grain preview command', args: 'preview'
-                    grainDeploy description: 'Runs Grain deploy command', args: 'deploy'
-                    grainClean description: 'Runs Grain clean command', args: 'clean'
+                    grain description: 'Runs Grain command line commands'
+                    grainGenerate description: 'Runs Grain generate command', command: 'generate'
+                    grainPreview description: 'Runs Grain preview command', command: 'preview'
+                    grainDeploy description: 'Runs Grain deploy command', command: 'deploy'
+                    grainClean description: 'Runs Grain clean command', command: 'clean'
                 }
 
                 new ConfigurationHandler(project).with {
@@ -44,6 +45,8 @@ class GrainPlugin implements Plugin<Project> {
                 new DependencyHandler(project).with {
                     grainCompile "com.sysgears.grain:grain:$grainVersion"
                 }
+            } else {
+                throw new InvalidUserDataException('Unable to find Grain version, please check [grain.projectDir] property')
             }
         }
     }
