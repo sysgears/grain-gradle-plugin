@@ -59,6 +59,7 @@ following `GrainTask`:
 task(grainCompress, type: com.sysgears.grain.gradle.GrainTask) {
    command = 'compress' // the name of the custom command
    // arguments = []    // the arguments to pass to the command
+   // jvmArguments = [] // JVM arguments to launch Grain process
 }
 ```
 [custom commands]: http://sysgears.com/grain/docs/latest/#creating-your-own-commands
