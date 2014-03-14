@@ -5,7 +5,7 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
 
 /**
- * Set ups Grain dependency configurations.
+ * Sets up Grain dependency configurations.
  */
 @TupleConstructor
 class ConfigurationHandler {

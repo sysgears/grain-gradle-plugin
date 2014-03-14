@@ -8,7 +8,7 @@ import org.gradle.api.Project
 class ProjectEnvironment {
 
     /**
-     * Look ups the value of given project property.
+     * Looks up the value of given project property.
      *
      * @param project the project to look up the property for
      * @param name the property name
@@ -21,7 +21,7 @@ class ProjectEnvironment {
     }
 
     /**
-     * Look ups the value of given environment variable.
+     * Looks up the value of given environment variable.
      *
      * @param name the name of the environment variable
      * @param value the value to return in case if the variable is not found
