@@ -4,7 +4,6 @@ import com.sysgears.grain.gradle.handlers.ConfigurationHandler
 import com.sysgears.grain.gradle.handlers.DependencyHandler
 import com.sysgears.grain.gradle.handlers.GrainTaskHandler
 import com.sysgears.grain.gradle.helpers.GrainEnvironment
-import org.gradle.api.InvalidUserDataException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
