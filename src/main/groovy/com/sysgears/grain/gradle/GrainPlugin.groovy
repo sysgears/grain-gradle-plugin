@@ -21,7 +21,6 @@ class GrainPlugin implements Plugin<Project> {
 
             if (grainVersion) {
                 new GrainTaskHandler(project).with {
-                    grain description: 'Runs Grain command line commands.'
                     grainGenerate description: 'Runs Grain generate command.', command: 'generate'
                     grainPreview description: 'Runs Grain preview command.', command: 'preview'
                     grainDeploy description: 'Runs Grain deploy command.', command: 'deploy'
