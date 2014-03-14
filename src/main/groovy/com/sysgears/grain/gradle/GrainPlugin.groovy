@@ -45,7 +45,7 @@ class GrainPlugin implements Plugin<Project> {
                     grainCompile "com.sysgears.grain:grain:$grainVersion"
                 }
             } else {
-                project.logger.warn("Unable to find Grain project in the [$configuration.projectDir] directory.")
+                project.logger.error("Error: Unable to find Grain project in the [$configuration.projectDir] directory.")
             }
         }
     }
