@@ -27,21 +27,13 @@ class GrainPlugin implements Plugin<Project> {
                     grainClean description: 'Runs Grain clean command.', command: 'clean'
                 }
 
-                new ConfigurationHandler(project).with {
+                new DependencyHandler(project).with {
+                    grain "com.sysgears.grain:grain:$grainVersion"
+                }
+
+                new ConfigurationHandler(project, 'grain').with {
                     exclude group: 'rhino'
                     exclude group: 'commons-logging'
-                }
-
-                project.sourceSets {
-                    grain {
-                        groovy {
-                            srcDirs = [configuration.projectDir ? "$configuration.projectDir/theme/src" : 'theme/src']
-                        }
-                    }
-                }
-
-                new DependencyHandler(project).with {
-                    grainCompile "com.sysgears.grain:grain:$grainVersion"
                 }
             } else {
                 project.logger.error("Error: Unable to find Grain project in the [$configuration.projectDir] directory.")

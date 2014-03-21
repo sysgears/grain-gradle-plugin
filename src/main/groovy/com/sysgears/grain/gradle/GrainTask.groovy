@@ -25,7 +25,7 @@ class GrainTask extends AbstractTask {
     void executeCommand() {
         project.javaexec {
             main = 'com.sysgears.grain.Main'
-            classpath = project.sourceSets.grain.runtimeClasspath
+            classpath = project.configurations.grain
             args = getGrainArguments()
             jvmArgs = getJvmArguments()
             standardInput = System.in

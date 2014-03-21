@@ -5,22 +5,20 @@ import org.gradle.api.Project
 import org.gradle.api.artifacts.Configuration
 
 /**
- * Sets up Grain dependency configurations.
+ * Sets up dependency configuration for the plugin.
  */
 @TupleConstructor
 class ConfigurationHandler {
 
-    /** List of Grain configurations */
-    private final List configurations = ['grainCompile', 'grainRuntime']
-
     /** Gradle project to which the plugin is applied. */
     Project project
 
-    def methodMissing(String name, args) {
+    /** Grain configuration. */
+    String configuration
 
-        configurations.each { String confName ->
-            Configuration conf = project.configurations.findByName(confName) ?: project.configurations.create(confName)
+    def methodMissing(String name, args) {
+            Configuration conf = project.configurations.findByName(configuration) ?:
+                project.configurations.create(configuration)
             conf."$name" args[0]
-        }
     }
 }
