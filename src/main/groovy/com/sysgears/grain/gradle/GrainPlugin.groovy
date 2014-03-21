@@ -17,16 +17,16 @@ class GrainPlugin implements Plugin<Project> {
         def configuration = project.extensions.create('grain', GrainPluginExtension)
 
         configuration.onSetProjectDir {
+            new GrainTaskHandler(project).with {
+                grainGenerate description: 'Runs Grain generate command.', command: 'generate'
+                grainPreview description: 'Runs Grain preview command.', command: 'preview'
+                grainDeploy description: 'Runs Grain deploy command.', command: 'deploy'
+                grainClean description: 'Runs Grain clean command.', command: 'clean'
+            }
+
             def grainVersion = GrainEnvironment.lookUpProperty(project, 'grain.version', '')
 
             if (grainVersion) {
-                new GrainTaskHandler(project).with {
-                    grainGenerate description: 'Runs Grain generate command.', command: 'generate'
-                    grainPreview description: 'Runs Grain preview command.', command: 'preview'
-                    grainDeploy description: 'Runs Grain deploy command.', command: 'deploy'
-                    grainClean description: 'Runs Grain clean command.', command: 'clean'
-                }
-
                 new DependencyHandler(project).with {
                     grain "com.sysgears.grain:grain:$grainVersion"
                 }
