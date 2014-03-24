@@ -20,7 +20,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.sysgears.grain:grain-gradle-plugin:0.1.0'
+        classpath 'com.sysgears.grain:grain-gradle-plugin:0.1.1'
     }
 }
 
