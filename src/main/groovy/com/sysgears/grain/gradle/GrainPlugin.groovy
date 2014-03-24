@@ -17,31 +17,23 @@ class GrainPlugin implements Plugin<Project> {
         def configuration = project.extensions.create('grain', GrainPluginExtension)
 
         configuration.onSetProjectDir {
+            new GrainTaskHandler(project).with {
+                grainGenerate description: 'Runs Grain generate command.', command: 'generate'
+                grainPreview description: 'Runs Grain preview command.', command: 'preview'
+                grainDeploy description: 'Runs Grain deploy command.', command: 'deploy'
+                grainClean description: 'Runs Grain clean command.', command: 'clean'
+            }
+
             def grainVersion = GrainEnvironment.lookUpProperty(project, 'grain.version', '')
 
             if (grainVersion) {
-                new GrainTaskHandler(project).with {
-                    grainGenerate description: 'Runs Grain generate command.', command: 'generate'
-                    grainPreview description: 'Runs Grain preview command.', command: 'preview'
-                    grainDeploy description: 'Runs Grain deploy command.', command: 'deploy'
-                    grainClean description: 'Runs Grain clean command.', command: 'clean'
+                new DependencyHandler(project).with {
+                    grain "com.sysgears.grain:grain:$grainVersion"
                 }
 
-                new ConfigurationHandler(project).with {
+                new ConfigurationHandler(project, 'grain').with {
                     exclude group: 'rhino'
                     exclude group: 'commons-logging'
-                }
-
-                project.sourceSets {
-                    grain {
-                        groovy {
-                            srcDirs = [configuration.projectDir ? "$configuration.projectDir/theme/src" : 'theme/src']
-                        }
-                    }
-                }
-
-                new DependencyHandler(project).with {
-                    grainCompile "com.sysgears.grain:grain:$grainVersion"
                 }
             } else {
                 project.logger.error("Error: Unable to find Grain project in the [$configuration.projectDir] directory.")
