@@ -31,7 +31,7 @@ repositories {
 }
 ```
 
-Then put your Grain site sources to the `src/site` directory (to start with, you can use one of the Grain [themes][Grain themes]).
+Then put your Grain site sources to the `src/site` directory (for example, you can use one of the Grain [themes][Grain themes]).
 
 As you have added the sources, you can preview, generate and deploy your Grain site:
 
@@ -50,7 +50,7 @@ Optionally, you can change the site sources directory by specifying the `grain.p
 
 ```groovy
  grain {
-     projectDir = 'src/site' // relative path to the site sources, default to 'src/site'
+     projectDir = '' // relative path to the site sources, default to 'src/site'
  }
 ```
 
