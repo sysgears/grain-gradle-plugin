@@ -29,14 +29,9 @@ apply plugin: 'grain'
 repositories {
     mavenCentral()
 }
-
-grain {
-    projectDir = 'src/site' // relative path to the site sources
-}
 ```
 
-Then put your Grain site sources to the directory specified in `grain.projectDir` property (to start with, you
-can use one of the Grain [themes][Grain themes]).
+Then put your Grain site sources to the `src/site` directory (to start with, you can use one of the Grain [themes][Grain themes]).
 
 As you have added the sources, you can preview, generate and deploy your Grain site:
 
@@ -47,6 +42,17 @@ As you have added the sources, you can preview, generate and deploy your Grain s
 
 [filesystem layout]: http://sysgears.com/grain/docs/latest/#filesystem-layout
 [deployment configuration]: http://sysgears.com/grain/docs/latest/#deployment-configuration
+
+Configuration
+-------------
+
+Optionally, you can change the site sources directory by specifying the `grain.projectDir` property:
+
+```groovy
+ grain {
+     projectDir = 'src/site' // relative path to the site sources, default to 'src/site'
+ }
+```
 
 Advanced Usage
 --------------

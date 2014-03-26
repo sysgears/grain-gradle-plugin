@@ -13,7 +13,7 @@ class GrainPluginExtension {
     private final ActionBroadcast<String> broadcast = new ActionBroadcast<String>()
 
     /** Relative path to Grain site project. */
-    String projectDir
+    String projectDir = null
 
     /**
      * Sets Grain version, thus calling actions connected to the broadcaster.
