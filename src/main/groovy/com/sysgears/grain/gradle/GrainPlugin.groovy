@@ -16,6 +16,7 @@ class GrainPlugin implements Plugin<Project> {
 
         def configuration = project.extensions.create('grain', GrainPluginExtension)
 
+        // Adds Grain tasks to the project.
         new GrainTaskHandler(project).with {
             grainGenerate description: 'Runs Grain generate command.', command: 'generate'
             grainPreview description: 'Runs Grain preview command.', command: 'preview'
@@ -23,6 +24,7 @@ class GrainPlugin implements Plugin<Project> {
             grainClean description: 'Runs Grain clean command.', command: 'clean'
         }
 
+        // Sets up dependency configuration for the plugin.
         configuration.onSetProjectDir {
             def grainVersion = GrainEnvironment.lookUpProperty(project, 'grain.version', '')
             if (grainVersion) {
@@ -38,6 +40,7 @@ class GrainPlugin implements Plugin<Project> {
             }
         }
 
+        // Provides default value for Grain project directory.
         project.afterEvaluate { prj ->
             if (prj.grain.projectDir == null) {
                 prj.grain.projectDir = 'src/site'

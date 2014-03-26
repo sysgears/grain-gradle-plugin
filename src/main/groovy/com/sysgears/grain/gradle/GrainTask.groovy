@@ -1,6 +1,7 @@
 package com.sysgears.grain.gradle
 
 import com.sysgears.grain.gradle.helpers.ProjectEnvironment
+import org.gradle.api.InvalidUserDataException
 import org.gradle.api.internal.AbstractTask
 import org.gradle.api.tasks.TaskAction
 
@@ -23,6 +24,11 @@ class GrainTask extends AbstractTask {
      */
     @TaskAction
     void executeCommand() {
+        if (!project.configurations.findByName('grain')) {
+            throw new InvalidUserDataException('Unable to find Grain project, please make sure you have put the site ' +
+                    'sources to the directory specified by the [grain.projectDir] property.')
+        }
+
         project.javaexec {
             main = 'com.sysgears.grain.Main'
             classpath = project.configurations.grain
