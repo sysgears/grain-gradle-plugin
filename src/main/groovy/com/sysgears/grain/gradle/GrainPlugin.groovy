@@ -26,6 +26,11 @@ class GrainPlugin implements Plugin<Project> {
 
         // Sets up dependency configuration for the plugin.
         configuration.onSetProjectDir {
+            project.task('grainInstall', type: GrainInstallTask) {
+                group = 'Grain'
+                description = 'Runs Grain theme installation command'
+            }
+
             def grainVersion = GrainEnvironment.lookUpProperty(project, 'grain.version', '')
             if (grainVersion) {
                 new DependencyHandler(project).with {
