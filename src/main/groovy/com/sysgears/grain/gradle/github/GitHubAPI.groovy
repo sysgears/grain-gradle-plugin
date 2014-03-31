@@ -2,39 +2,40 @@ package com.sysgears.grain.gradle.github
 
 import groovyx.net.http.HTTPBuilder
 import org.gradle.api.Project
-
 import static groovyx.net.http.Method.GET
 
-class LatestThemeVersionFinder {
+class GitHubAPI {
 
-    static String lookup(final Project project, final String theme) {
+    static List getTags(final Project project, final username, final String repo) {
 
-        String latestVersion = null
+        List tagList = []
 
-        String normalizedTheme = GitHubHelper.normalizeThemeName(theme)
-
-        def http = new HTTPBuilder("https://api.github.com/repos/$GitHubHelper.THEME_REPOS_HOLDER/$normalizedTheme/git/refs/tags")
+        def http = new HTTPBuilder("https://api.github.com/repos/$username/$repo/git/refs/tags")
 
         http.request(GET) { req ->
             headers.'User-Agent' = "Mozilla/5.0"
 
             response.success = { resp, reader ->
-                List tagList = []
                 reader.each {
                     if (it.ref) {
-                        def matcher = it.ref =~ /refs\/tags\/v([0-9\.]+)/
+                        def matcher = it.ref =~  /refs\/tags\/(.+)/
                         if (matcher) {
                             tagList << matcher[0][1]
                         }
                     }
                 }
-                latestVersion = tagList?.size() > 0 ? tagList.last() : null
             }
 
             response.failure = { resp, reader ->
-                project.logger.error("Couldn't fetch latest version of theme $theme. Got response:\n" +
+                project.logger.error("Couldn't get tag list for $repo repo. Got response:\n" +
                         "${resp.statusLine}${reader ? '\n' + reader : ''}")
             }
         }
+
+        tagList
+    }
+
+    static String buildReleaseDownloadUrl(String username, String repo, String releaseTag) {
+        "https://github.com/${username}/${repo}/archive/${releaseTag}.zip"
     }
 }

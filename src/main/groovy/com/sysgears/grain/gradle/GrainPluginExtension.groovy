@@ -15,6 +15,12 @@ class GrainPluginExtension {
     /** Relative path to Grain site project. */
     String projectDir = null
 
+    /** Grain site theme */
+    String theme = 'template'
+
+    /** Grain site theme version */
+    String themeVersion = null
+
     /**
      * Sets Grain version, thus calling actions connected to the broadcaster.
      *
