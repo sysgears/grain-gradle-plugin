@@ -4,8 +4,19 @@ import groovyx.net.http.HTTPBuilder
 import org.gradle.api.Project
 import static groovyx.net.http.Method.GET
 
+/**
+ * Provides interaction with GitHub service
+ */
 class GitHubAPI {
 
+    /**
+     * Returns tag list
+     *
+     * @param project project instance
+     * @param username GitHub username of user or organization
+     * @param repo repository name
+     * @return list of tags
+     */
     static List getTags(final Project project, final username, final String repo) {
 
         List tagList = []
@@ -35,6 +46,14 @@ class GitHubAPI {
         tagList
     }
 
+    /**
+     * Builds url to a release.
+     *
+     * @param username GitHub username of user or organization
+     * @param repo repository name
+     * @param releaseTag tag of the requested release
+     * @return download url
+     */
     static String buildReleaseDownloadUrl(String username, String repo, String releaseTag) {
         "https://github.com/${username}/${repo}/archive/${releaseTag}.zip"
     }

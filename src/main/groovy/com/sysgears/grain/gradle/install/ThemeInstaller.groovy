@@ -1,7 +1,17 @@
 package com.sysgears.grain.gradle.install
 
+/**
+ * Provides logic for Grain theme installation.
+ */
 class ThemeInstaller {
 
+    /**
+     * Installs theme to a specified directory,
+     *
+     * @param downloadUrl url to fetch theme archive from
+     * @param destDir theme destination dir
+     * @param archiveFolder folder that contains theme files inside the downloaded archive
+     */
     static void install(final String downloadUrl, final String destDir, final String archiveFolder = null) {
         def ant = new AntBuilder()
 

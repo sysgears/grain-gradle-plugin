@@ -10,12 +10,20 @@ import org.gradle.api.InvalidUserDataException
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.TaskInstantiationException
 
+/**
+ * Grain task which provides functionality for Grain theme installation,
+ */
 class GrainInstallTask extends DefaultTask {
 
+    /** Grain theme to install. */
     String theme
 
+    /** Theme version to install. */
     String version
 
+    /**
+     * Default grain action.
+     */
     @TaskAction
     def executeCommand() {
 
