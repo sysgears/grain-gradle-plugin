@@ -6,7 +6,7 @@ package com.sysgears.grain.gradle.install
 class ThemeInstaller {
 
     /** Temp archive file to hold theme files. */
-    private static final tempThemeFile = 'theme.zip'
+    private static final TEMP_THEME_FILE = 'theme.zip'
 
     /**
      * Installs theme to a specified directory,
@@ -24,11 +24,11 @@ class ThemeInstaller {
             ant.mkdir(dir: refinedDest)
         }
 
-        ant.get(src: downloadUrl, verbose: 'true', dest: "${refinedDest}${tempThemeFile}")
+        ant.get(src: downloadUrl, verbose: 'true', dest: "${refinedDest}${TEMP_THEME_FILE}")
 
         ant.sequential {
-            ant.unzip(src: "${refinedDest}${tempThemeFile}", dest: "$refinedDest", overwrite: 'true')
-            ant.delete(file: "${refinedDest}${tempThemeFile}")
+            ant.unzip(src: "${refinedDest}${TEMP_THEME_FILE}", dest: "$refinedDest", overwrite: 'true')
+            ant.delete(file: "${refinedDest}${TEMP_THEME_FILE}")
             if (archiveFolder) {
                 ant.copy(todir: "$refinedDest") {
                     fileset(dir: "${refinedDest}${archiveFolder}")

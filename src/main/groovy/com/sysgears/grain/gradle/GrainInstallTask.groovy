@@ -13,12 +13,6 @@ import org.gradle.api.tasks.TaskInstantiationException
  */
 class GrainInstallTask extends DefaultTask {
 
-    /** Grain theme to install. */
-    String theme = 'template'
-
-    /** Theme version to install. */
-    String version
-
     /** GitHub username of the user or the organization. */
     private static final String GITHUB_USERNAME = 'sysgears'
 
@@ -27,6 +21,12 @@ class GrainInstallTask extends DefaultTask {
 
     /** Prefix for the version tags. */
     private static final String VERSION_TAG_PREFIX = 'v'
+
+    /** Grain theme to install. */
+    String theme = 'template'
+
+    /** Theme version to install. */
+    String version
 
     /**
      * Default grain action.
