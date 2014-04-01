@@ -31,14 +31,33 @@ repositories {
 }
 ```
 
-Then put your Grain site sources to the `src/site` directory (for example, you can use one of the Grain [themes][Grain themes]).
+Then you'll need to put the Grain site sources to the `src/site` directory. For this purpose you can use one of the
+Grain [themes][Grain themes]. In order to install a theme, you will need to specify the Grain theme and it's version by
+specifying `grain.theme` and `grain.themeVersion` properties in your *build.gradle*.
 
-As you have added the sources, you can preview, generate and deploy your Grain site:
+```groovy
+  grain {
+      theme = 'template' // theme to install
+      themeVersion = '0.4.2' // version of the theme
+  }
+```
+
+**Note:** if `grain.theme` isn't specified, [Template][Template theme] theme will be installed by default, and if you
+don't specify `grain.themeVersion`, the latest available version will be fetched.
+
+When you have theme details you want to install configured, simply run the following to install the theme:
+
+```
+  gradle grainInstall
+```
+
+As you have added the sources, you can execute the following Gradle tasks:
 
  - `gradle grainPreview` - launches your website in a preview mode
  - `gradle grainGenerate` - generates all the website files to the *destination* directory (see [filesystem layout][filesystem layout])
  - `gradle grainDeploy` - deploys the resulting files (see [deployment configuration][deployment configuration])
  - `gradle grainClean` - cleans the site *destination* and *target* directories
+ - `gralde grainInstall` - installs Grain theme 
 
 [filesystem layout]: http://sysgears.com/grain/docs/latest/#filesystem-layout
 [deployment configuration]: http://sysgears.com/grain/docs/latest/#deployment-configuration
@@ -162,5 +181,6 @@ Grain Gradle plugin is licensed under the terms of the [Apache License, Version 
 
 [Grain]: http://sysgears.com/grain/
 [Grain themes]: http://sysgears.com/grain/themes/
+[Template theme]: http://sysgears.com/grain/themes/template/
 [Apache License, Version 2.0]: http://www.apache.org/licenses/LICENSE-2.0.html
 [Developer Certificate of Origin]: https://raw.github.com/sysgears/grain/master/DCO
