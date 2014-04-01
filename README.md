@@ -31,16 +31,16 @@ repositories {
 }
 ```
 
-Then you'll need to put the Grain site sources to the `src/site` directory. For this purpose you can use one of the
+Then you'll need to put a Grain site sources to the `src/site` directory. For this purpose you can use one of the
 Grain [themes][Grain themes]. If you have already downloaded a Grain theme, simply copy its files to the `src/site`.
 Alternatively, you may install a theme by running Gradle task of appropriate type. Just copy the following to your
-*build.gradle* to add the task:
+*build.gradle* script:
 
 ```groovy
-  task grainInstall(type: com.sysgears.grain.gradle.GrainInstallTask) {
-      theme = 'template' // theme to install, could be "template", "octopress", etc.
-      version = '0.4.1' // theme version
-  }
+task grainInstall(type: com.sysgears.grain.gradle.GrainInstallTask) {
+    theme = 'template' // theme to install, can be 'template', 'octopress', etc.
+    version = '0.4.2'  // theme version
+}
 ```
 
 > If the `theme` argument isn't specified, [Theme Template][Theme Template] will be installed by default, and if you
@@ -62,9 +62,9 @@ Configuration
 Optionally, you can change the site sources directory by specifying the `grain.projectDir` property:
 
 ```groovy
- grain {
-     projectDir = '' // relative path to the site sources, default to 'src/site'
- }
+grain {
+    projectDir = '' // relative path to the site sources, default to 'src/site'
+}
 ```
 
 Advanced Usage
