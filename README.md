@@ -32,25 +32,19 @@ repositories {
 ```
 
 Then you'll need to put the Grain site sources to the `src/site` directory. For this purpose you can use one of the
-Grain [themes][Grain themes]. If you have already downloaded a Grain theme, simply copy its files to `src/site`.
+Grain [themes][Grain themes]. If you have already downloaded a Grain theme, simply copy its files to the `src/site`.
 Alternatively, you may install a theme by running Gradle task of appropriate type. Just copy the following to your
-*build.gradle*:
+*build.gradle* to add the task:
 
 ```groovy
   task grainInstall(type: com.sysgears.grain.gradle.GrainInstallTask) {
-      theme = 'template' // theme to install, could be template, octopress
+      theme = 'template' // theme to install, could be "template", "octopress", etc.
       version = '0.4.1' // theme version
   }
 ```
 
-> If `theme` argument isn't specified, [Template][Template theme] theme will be installed by default, and if you
-don't set `version`, the latest available version will be fetched.
-
-When you have theme details you want to install configured, simply run the following to install the theme:
-
-```
-  gradle grainInstall
-```
+> If the `theme` argument isn't specified, [Theme Template][Theme Template] will be installed by default, and if you
+don't set the `version`, the latest available version will be fetched.
 
 As you have added the sources, you can execute the following Gradle tasks:
 
@@ -181,6 +175,6 @@ Grain Gradle plugin is licensed under the terms of the [Apache License, Version 
 
 [Grain]: http://sysgears.com/grain/
 [Grain themes]: http://sysgears.com/grain/themes/
-[Template theme]: http://sysgears.com/grain/themes/template/
+[Theme Template]: http://sysgears.com/grain/themes/template/
 [Apache License, Version 2.0]: http://www.apache.org/licenses/LICENSE-2.0.html
 [Developer Certificate of Origin]: https://raw.github.com/sysgears/grain/master/DCO
