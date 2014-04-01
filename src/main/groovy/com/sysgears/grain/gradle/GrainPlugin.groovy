@@ -35,8 +35,6 @@ class GrainPlugin implements Plugin<Project> {
                     exclude group: 'rhino'
                     exclude group: 'commons-logging'
                 }
-            } else {
-                project.logger.error("Error: Unable to find Grain project in the [$configuration.projectDir] directory.")
             }
         }
 
