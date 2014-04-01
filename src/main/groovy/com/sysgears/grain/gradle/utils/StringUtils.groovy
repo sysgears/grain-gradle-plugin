@@ -6,7 +6,7 @@ package com.sysgears.grain.gradle.utils
 class StringUtils {
 
     /**
-     * Appends specified prefix to a string, if the string doesn't already contains that prefix.
+     * Appends specified prefix to a string, if the string doesn't already contain that prefix.
      *
      * @param value string to append prefix to
      * @param prefix prefix to append
