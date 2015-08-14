@@ -24,24 +24,24 @@ class GrainPlugin implements Plugin<Project> {
             grainClean description: 'Runs Grain clean command.', command: 'clean'
         }
 
-        // Sets up dependency configuration for the plugin.
-        configuration.onSetProjectDir {
-            def grainVersion = GrainEnvironment.lookUpProperty(project, 'grain.version', '')
-            if (grainVersion) {
+        project.afterEvaluate {
+
+            configuration.projectDir = configuration.projectDir?: 'src/site'
+
+            if (GrainEnvironment.exists(configuration.projectDir)) {
+
+                // looks up the Grain version
+                configuration.version = configuration.version ?:
+                    GrainEnvironment.lookUpProperty(configuration.projectDir, 'grain.version')
+
+                // sets up the dependency configuration for the plugin
                 new DependencyHandler(project).with {
-                    grain "com.sysgears.grain:grain:$grainVersion"
+                    grain "com.sysgears.grain:grain:${configuration.version}"
                 }
                 new ConfigurationHandler(project, 'grain').with {
                     exclude group: 'rhino'
                     exclude group: 'commons-logging'
                 }
-            }
-        }
-
-        // Provides default value for Grain project directory.
-        project.afterEvaluate { prj ->
-            if (prj.grain.projectDir == null) {
-                prj.grain.projectDir = 'src/site'
             }
         }
     }

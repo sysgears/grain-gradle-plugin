@@ -25,8 +25,8 @@ class GrainTask extends AbstractTask {
     @TaskAction
     void executeCommand() {
         if (!project.configurations.findByName('grain')) {
-            throw new InvalidUserDataException('Unable to find Grain project, please make sure you have put the site ' +
-                    'sources to the directory specified by the [grain.projectDir] property.')
+            throw new InvalidUserDataException('Unable to find the Grain site project, please make sure that ' +
+                    'the site sources are in the [grain.projectDir] directory.')
         }
 
         project.javaexec {
