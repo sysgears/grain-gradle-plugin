@@ -1,10 +1,10 @@
 Grain Gradle Plugin
 ===================
 
-Gradle plugin for [Grain][Grain] framework. Grain is a general purpose static site generator which provides
-all the modern features and tools for generating any kind of HTML content: Markdown, RST and AsciiDoc markup
-rendering, page templates, dynamic content handling, resources compression and minification, code highlighting
-via Python Pygments and more.
+Gradle plugin for [Grain][Grain] framework. Grain is a general purpose static site generator which allows
+to build websites of any size and complexity -- project and documentation sites, custom blog resources, etc.
+Grain supports Markdown, RST and AsciiDoc markup rendering, page templates with embedded Groovy code,
+resource compression and minification, code highlighting using Python Pygments and more.
 
 The plugin allows to create and manage your static website using Gradle, thus making it much easier to
 create sites for your existing Gradle projects.
@@ -20,7 +20,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.sysgears.grain:grain-gradle-plugin:0.2.0'
+        classpath 'com.sysgears.grain:grain-gradle-plugin:0.2.1'
     }
 }
 
@@ -64,6 +64,29 @@ Optionally, you can change the site sources directory by specifying the `grain.p
 ```groovy
 grain {
     projectDir = '' // relative path to the site sources, default to 'src/site'
+}
+```
+
+Also, you can set a specific Grain version, just be sure that it is compatible with the your theme:
+
+```groovy
+grain {
+    version = '0.6.5' // the Grain version, must be compatible with the theme version
+}
+```
+
+To use the latest Grain snapshot, you should define the Sonatype snapshots repository first:
+
+```groovy
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
+}
+
+grain {
+    version = '0.7.0-SNAPSHOT'
 }
 ```
 

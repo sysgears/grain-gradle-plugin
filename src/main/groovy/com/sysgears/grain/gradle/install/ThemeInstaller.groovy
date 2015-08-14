@@ -8,6 +8,9 @@ class ThemeInstaller {
     /** Temp archive file to hold theme files. */
     private static final TEMP_THEME_FILE = 'theme.zip'
 
+    /** Prefix for the temp theme installation directory. */
+    private static final TEMP_DIR_PREFIX = 'grain-theme-installation'
+
     /**
      * Installs theme to a specified directory,
      *
@@ -15,26 +18,34 @@ class ThemeInstaller {
      * @param destDir theme destination dir
      * @param archiveFolder folder that contains theme files inside the downloaded archive
      */
-    static void install(final String downloadUrl, final String destDir, final String archiveFolder = null) {
+    static void install(final String downloadUrl, final String destDir, final String archiveFolder) {
         def ant = new AntBuilder()
 
         String refinedDest = destDir.isEmpty() || destDir.endsWith('/') ? destDir : "$destDir/"
 
-        if (!new File(refinedDest).exists()) {
-            ant.mkdir(dir: refinedDest)
-        }
+        // Creating temp directory
+        ant.tempfile(property: 'tempFile', destDir: System.getProperty('java.io.tmpdir'), prefix: TEMP_DIR_PREFIX)
+        def tempDir = ant.project.properties.tempFile
+        ant.mkdir(dir: tempDir)
 
-        ant.get(src: downloadUrl, verbose: 'true', dest: "${refinedDest}${TEMP_THEME_FILE}")
+        // Checking if destination directory exists
+        ant.available(property: 'destAvailable', file: refinedDest, type: 'dir')
+        def destAvailable = ant.project.properties.destAvailable == 'true'
 
-        ant.sequential {
-            ant.unzip(src: "${refinedDest}${TEMP_THEME_FILE}", dest: "$refinedDest", overwrite: 'true')
-            ant.delete(file: "${refinedDest}${TEMP_THEME_FILE}")
-            if (archiveFolder) {
-                ant.copy(todir: "$refinedDest") {
-                    fileset(dir: "${refinedDest}${archiveFolder}")
+        try {
+            ant.get(src: downloadUrl, verbose: 'true', dest: "${tempDir}/${TEMP_THEME_FILE}")
+
+            ant.sequential {
+                ant.unzip(src: "${tempDir}/${TEMP_THEME_FILE}", dest: "$tempDir", overwrite: 'true')
+                if (!destAvailable) {
+                    ant.mkdir(dir: refinedDest)
                 }
-                ant.delete(dir: "${refinedDest}${archiveFolder}")
+                ant.copy(todir: "$refinedDest") {
+                    fileset(dir: "${tempDir}/${archiveFolder}")
+                }
             }
+        } finally {
+            ant.delete(dir: "${tempDir}")
         }
     }
 }
