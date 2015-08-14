@@ -1,10 +1,10 @@
 Grain Gradle Plugin
 ===================
 
-Gradle plugin for [Grain][Grain] framework. Grain is a general purpose static site generator which provides
-all the modern features and tools for generating any kind of HTML content: Markdown, RST and AsciiDoc markup
-rendering, page templates, dynamic content handling, resources compression and minification, code highlighting
-via Python Pygments and more.
+Gradle plugin for [Grain][Grain] framework. Grain is a general purpose static site generator which allows
+to build websites of any size and complexity -- project and documentation sites, custom blog resources, etc.
+Grain supports Markdown, RST and AsciiDoc markup rendering, page templates with embedded Groovy code,
+resource compression and minification, code highlighting using Python Pygments and more.
 
 The plugin allows to create and manage your static website using Gradle, thus making it much easier to
 create sites for your existing Gradle projects.
