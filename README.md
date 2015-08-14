@@ -67,6 +67,29 @@ grain {
 }
 ```
 
+Also, you can set a specific Grain version, just be sure that it is compatible with the your theme:
+
+```groovy
+grain {
+    version = '0.6.5' // the Grain version, must be compatible with the theme version
+}
+```
+
+Finally, to use the latest Grain snapshot, you should define the Sonatype snapshots repository first:
+
+```groovy
+repositories {
+    mavenCentral()
+    maven {
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
+}
+
+grain {
+    version = '0.7.0-SNAPSHOT'
+}
+```
+
 Advanced Usage
 --------------
 
