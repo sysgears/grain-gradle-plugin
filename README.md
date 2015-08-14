@@ -20,7 +20,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.sysgears.grain:grain-gradle-plugin:0.2.0'
+        classpath 'com.sysgears.grain:grain-gradle-plugin:0.2.1'
     }
 }
 
@@ -75,7 +75,7 @@ grain {
 }
 ```
 
-Finally, to use the latest Grain snapshot, you should define the Sonatype snapshots repository first:
+To use the latest Grain snapshot, you should define the Sonatype snapshots repository first:
 
 ```groovy
 repositories {
