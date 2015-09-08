@@ -12,26 +12,40 @@ create sites for your existing Gradle projects.
 Getting Started
 ===============
 
-To use it, simply add the following to your *build.gradle* file:
+To use in Gradle 2.1 and later:
 
 ```groovy
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.sysgears.grain:grain-gradle-plugin:0.2.1'
-    }
+plugins {
+  id "com.sysgears.grain" version "0.2.3"
 }
-
-apply plugin: 'grain'
 
 repositories {
     mavenCentral()
 }
 ```
 
-Then you'll need to put a Grain site sources to the `src/site` directory. For this purpose you can use one of the
+To use in earlier versions of Gradle:
+
+```groovy
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "gradle.plugin.com.sysgears.grain:grain-gradle-plugin:0.2.3"
+  }
+}
+
+apply plugin: "com.sysgears.grain"
+
+repositories {
+    mavenCentral()
+}
+```
+
+Then put a Grain site sources to the `src/site` directory. For this purpose you can use one of the
 Grain [themes][Grain themes]. If you have already downloaded a Grain theme, simply copy its files to the `src/site`.
 Alternatively, you may install a theme by running Gradle task of appropriate type. Just copy the following to your
 *build.gradle* script:
