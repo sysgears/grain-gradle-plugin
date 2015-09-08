@@ -42,7 +42,7 @@ task wrapper(type: Wrapper) {
 }
 
 pluginBundle {
-    website = 'http://sysgears.com/'
+    website = 'https://github.com/sysgears/grain-gradle-plugin'
     vcsUrl = 'https://github.com/sysgears/grain-gradle-plugin'
     description = 'Gradle plugin for Grain static site generator'
     tags = ['grain']
