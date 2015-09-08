@@ -28,7 +28,7 @@ dependencies {
 
 
 group = 'com.sysgears.grain'
-version = '0.3.0-SNAPSHOT'
+version = '0.2.2'
 
 idea {
     module {
