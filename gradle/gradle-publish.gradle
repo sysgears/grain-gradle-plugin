@@ -1,0 +1,15 @@
+apply plugin: 'com.gradle.plugin-publish'
+
+pluginBundle {
+    website = 'https://github.com/sysgears/grain-gradle-plugin'
+    vcsUrl = 'https://github.com/sysgears/grain-gradle-plugin'
+    description = 'Gradle plugin for Grain static site generator'
+    tags = ['grain']
+
+    plugins {
+        grainPlugin {
+            id = 'com.sysgears.grain'
+            displayName = 'Gradle Grain plugin'
+        }
+    }
+}

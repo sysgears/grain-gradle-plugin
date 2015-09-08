@@ -9,8 +9,6 @@ buildscript {
     }
 }
 
-apply plugin: "com.gradle.plugin-publish"
-
 apply plugin: 'idea'
 apply plugin: 'groovy'
 
@@ -41,18 +39,5 @@ task wrapper(type: Wrapper) {
     gradleVersion = '1.8'
 }
 
-pluginBundle {
-    website = 'https://github.com/sysgears/grain-gradle-plugin'
-    vcsUrl = 'https://github.com/sysgears/grain-gradle-plugin'
-    description = 'Gradle plugin for Grain static site generator'
-    tags = ['grain']
-
-    plugins {
-        grainPlugin {
-            id = 'com.sysgears.grain'
-            displayName = 'Gradle Grain plugin'
-        }
-    }
-}
-
-apply from: 'gradle/publish.gradle'
+apply from: 'gradle/maven-publish.gradle'
+apply from: 'gradle/gradle-publish.gradle'
