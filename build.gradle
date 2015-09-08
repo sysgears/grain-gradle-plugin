@@ -1,11 +1,21 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.gradle.publish:plugin-publish-plugin:0.9.1"
+    }
+}
+
+apply plugin: "com.gradle.plugin-publish"
+
 apply plugin: 'idea'
 apply plugin: 'groovy'
 
-group = 'com.sysgears.grain'
-version = '0.3.0-SNAPSHOT'
-
 repositories {
-    mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -16,6 +26,10 @@ dependencies {
     compile 'org.codehaus.groovy:groovy:2.2.1'
 }
 
+
+group = 'com.sysgears.grain'
+version = '0.3.0-SNAPSHOT'
+
 idea {
     module {
         excludeDirs = ['.cache', '.idea', '.gradle', '.nb-gradle',
@@ -25,6 +39,20 @@ idea {
 
 task wrapper(type: Wrapper) {
     gradleVersion = '1.8'
+}
+
+pluginBundle {
+    website = 'http://sysgears.com/'
+    vcsUrl = 'https://github.com/sysgears/grain-gradle-plugin'
+    description = 'Gradle plugin for Grain static site generator'
+    tags = ['grain']
+
+    plugins {
+        grainPlugin {
+            id = 'com.sysgears.grain'
+            displayName = 'Gradle Grain plugin'
+        }
+    }
 }
 
 apply from: 'gradle/publish.gradle'
