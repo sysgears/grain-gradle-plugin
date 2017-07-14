@@ -1,6 +1,8 @@
 Grain Gradle Plugin
 ===================
 
+[![Twitter Follow](https://img.shields.io/twitter/follow/sysgears.svg?style=social)](https://twitter.com/sysgears)
+
 Gradle plugin for [Grain][Grain] framework. Grain is a general purpose static site generator which allows
 to build websites of any size and complexity, like project and documentation sites or custom blog resources.
 Grain supports Markdown, RST and AsciiDoc markup rendering, page templates with embedded Groovy code,
